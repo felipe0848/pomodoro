@@ -6,7 +6,10 @@ import logoIgnite from '../../assets/Logo-Ignite.svg'
 export function Header() {
   return (
     <HeaderContainer>
-      <img src={logoIgnite} alt="" />
+      <span>
+        <img src={logoIgnite} alt="" />
+      </span>
+
       <nav>
         <NavLink to="/" title="Timer">
           <Timer size={24} />

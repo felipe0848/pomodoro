@@ -52,7 +52,6 @@ export function CyclesContextProvider({
     )
 
     setActiveCycleId(null)
-    // reset()
     document.title = `Pomodoro | Timer`
   }
 
@@ -79,7 +78,6 @@ export function CyclesContextProvider({
       }),
     )
     setActiveCycleId(null)
-    // reset()
     document.title = `Pomodoro | Timer`
   }
 

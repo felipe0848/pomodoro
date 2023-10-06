@@ -6,7 +6,6 @@ export function History() {
   const { cycles } = useContext(CyclesContext)
   return (
     <HistoryContainer>
-      <pre>{JSON.stringify(cycles, null, 2)}</pre>
       <h1>Meu histórico</h1>
       <TableContainer>
         <table>
@@ -19,62 +18,24 @@ export function History() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Conserto de débitos técnicos </td>
-              <td>25 minutos</td>
-              <td>Há cerca de 2 meses</td>
-              <td>
-                <Status $color="green">Concluido</Status>
-              </td>
-            </tr>
-            <tr>
-              <td>Conserto de débitos técnicos </td>
-              <td>25 minutos</td>
-              <td>Há cerca de 2 meses</td>
-              <td>
-                <Status $color="yellow">Em andamento</Status>
-              </td>
-            </tr>
-            <tr>
-              <td>Conserto de débitos técnicos </td>
-              <td>25 minutos</td>
-              <td>Há cerca de 2 meses</td>
-              <td>
-                <Status $color="red">Interrompido</Status>
-              </td>
-            </tr>
-            <tr>
-              <td>Conserto de débitos técnicos </td>
-              <td>25 minutos</td>
-              <td>Há cerca de 2 meses</td>
-              <td>
-                <Status $color="green">Em andamento</Status>
-              </td>
-            </tr>
-            <tr>
-              <td>Conserto de débitos técnicos </td>
-              <td>25 minutos</td>
-              <td>Há cerca de 2 meses</td>
-              <td>
-                <Status $color="green">Em andamento</Status>
-              </td>
-            </tr>
-            <tr>
-              <td>Conserto de débitos técnicos </td>
-              <td>25 minutos</td>
-              <td>Há cerca de 2 meses</td>
-              <td>
-                <Status $color="green">Em andamento</Status>
-              </td>
-            </tr>
-            <tr>
-              <td>Conserto de débitos técnicos </td>
-              <td>25 minutos</td>
-              <td>Há cerca de 2 meses</td>
-              <td>
-                <Status $color="green">Em andamento</Status>
-              </td>
-            </tr>
+            {cycles.map((cycle) => (
+              <tr key={cycle.id}>
+                <td>{cycle.task}</td>
+                <td>{cycle.minutesAmount} minutos</td>
+                <td>{cycle.startDate.toISOString()}</td>
+                <td>
+                  {cycle.finishedDate && (
+                    <Status $color="green">Concluido</Status>
+                  )}
+                  {cycle.interruptDate && (
+                    <Status $color="red">Interrompido</Status>
+                  )}
+                  {!cycle.finishedDate && !cycle.interruptDate && (
+                    <Status $color="yellow">Em andamento</Status>
+                  )}
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </TableContainer>

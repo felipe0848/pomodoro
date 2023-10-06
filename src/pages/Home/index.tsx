@@ -8,11 +8,30 @@ import {
   StartCountDownButton,
   TaskInput,
 } from './styles'
+import { useForm } from 'react-hook-form'
+
+interface newCicleFormSchema {
+  task: string
+  minutesAmount: number
+}
 
 export function Home() {
+  const { register, handleSubmit, reset, watch } = useForm<newCicleFormSchema>({
+    defaultValues: {
+      task: '',
+      minutesAmount: 0,
+    },
+  })
+
+  const taskTitle = watch('task')
+  const isSubmitDisable = !taskTitle
+  const handleCreateNewCicle = (data: newCicleFormSchema) => {
+    console.log(data)
+    reset()
+  }
   return (
     <HomeContainer>
-      <form action="">
+      <form onSubmit={handleSubmit(handleCreateNewCicle)}>
         <FormContainer>
           <label htmlFor="task">Vou trabalhar em</label>
           <TaskInput
@@ -20,6 +39,7 @@ export function Home() {
             id="task"
             placeholder="Dê um nome para o seu projeto"
             list="task-suggestions"
+            {...register('task')}
           />
 
           <datalist id="task-suggestions">
@@ -36,6 +56,7 @@ export function Home() {
             step={5}
             min={5}
             max={60}
+            {...register('minutesAmount', { valueAsNumber: true })}
           />
           <span>minutos.</span>
         </FormContainer>
@@ -46,7 +67,7 @@ export function Home() {
           <span>0</span>
           <span>0</span>
         </CountDownContainer>
-        <StartCountDownButton type="submit">
+        <StartCountDownButton type="submit" disabled={isSubmitDisable}>
           <Play size={24} />
           Começar
         </StartCountDownButton>

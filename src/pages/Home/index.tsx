@@ -9,26 +9,48 @@ import {
   TaskInput,
 } from './styles'
 import { useForm } from 'react-hook-form'
+import { useState } from 'react'
 
-interface newCicleFormSchema {
+interface newCycleFormSchema {
+  task: string
+  minutesAmount: number
+}
+
+interface Cycle {
+  id: string
   task: string
   minutesAmount: number
 }
 
 export function Home() {
-  const { register, handleSubmit, reset, watch } = useForm<newCicleFormSchema>({
+  const [cycles, setCycles] = useState<Cycle[]>([])
+  const [activeCycleId, setActiveCycleId] = useState<string | null>(null)
+
+  const { register, handleSubmit, reset, watch } = useForm<newCycleFormSchema>({
     defaultValues: {
       task: '',
       minutesAmount: 0,
     },
   })
 
-  const taskTitle = watch('task')
-  const isSubmitDisable = !taskTitle
-  const handleCreateNewCicle = (data: newCicleFormSchema) => {
-    console.log(data)
+  const handleCreateNewCicle = (data: newCycleFormSchema) => {
+    const id = String(new Date().getTime())
+    const newCycle: Cycle = {
+      id,
+      task: data.task,
+      minutesAmount: data.minutesAmount,
+    }
+
+    setCycles((state) => [...state, newCycle])
+    setActiveCycleId(id)
     reset()
   }
+  const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId)
+  console.log(activeCycle)
+
+  const taskTitle = watch('task')
+
+  const isSubmitDisable = !taskTitle
   return (
     <HomeContainer>
       <form onSubmit={handleSubmit(handleCreateNewCicle)}>

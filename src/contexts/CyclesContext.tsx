@@ -1,5 +1,10 @@
 import { ReactNode, createContext, useReducer, useState } from 'react'
-import { ActionTypes, Cycle, cyclesReducer } from '../reducers/cycles'
+import { Cycle, cyclesReducer } from '../reducers/cycles/reducer'
+import {
+  createNewCycleAction,
+  interruptCurrentCycleAction,
+  markCurrentCycleAsFinishedAction,
+} from '../reducers/cycles/actions'
 
 export interface newCycleFormSchema {
   task: string
@@ -38,12 +43,7 @@ export function CyclesContextProvider({
   }
 
   const markCurrentCycleAsFinished = () => {
-    dispath({
-      type: ActionTypes.MARK_CURRENT_CYCLE_AS_FINISHED,
-      payload: {
-        activeCycleId,
-      },
-    })
+    dispath(markCurrentCycleAsFinishedAction())
 
     document.title = `Pomodoro | Timer`
   }
@@ -57,23 +57,13 @@ export function CyclesContextProvider({
       startDate: new Date(),
     }
 
-    dispath({
-      type: ActionTypes.ADD_NEW_CYCLE,
-      payload: {
-        newCycle,
-      },
-    })
+    dispath(createNewCycleAction(newCycle))
 
     setAmountSecondsPassed(0)
   }
 
   const interruptCurrentCycle = () => {
-    dispath({
-      type: ActionTypes.INTERRUPT_CURRENT_CYCLE,
-      payload: {
-        activeCycleId,
-      },
-    })
+    dispath(interruptCurrentCycleAction())
 
     document.title = `Pomodoro | Timer`
   }

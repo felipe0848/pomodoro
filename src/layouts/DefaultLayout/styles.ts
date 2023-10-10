@@ -16,7 +16,7 @@ export const LayoutContainer = styled.div`
     margin: 5rem 2rem;
   }
   @media (max-width: 425px) {
-    height: max-content;
+    min-height: max-content;
     gap: 4rem;
   }
 `

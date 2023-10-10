@@ -22,4 +22,14 @@ body, input, textarea, button{
     font-weight: 400;
     font-size: 1rem;
 }
+@media(max-width: 768px){
+    html{
+        font-size: 85%;
+    }
+}
+@media(max-width: 560px){
+    html{
+        font-size: 70%;
+    }
+}
 `

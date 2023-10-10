@@ -11,4 +11,12 @@ export const LayoutContainer = styled.div`
 
   background: ${(props) => props.theme['gray-800']};
   border-radius: 8px;
+
+  @media (max-width: 1024px) {
+    margin: 5rem 2rem;
+  }
+  @media (max-width: 425px) {
+    height: max-content;
+    gap: 4rem;
+  }
 `

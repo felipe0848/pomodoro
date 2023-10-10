@@ -12,6 +12,12 @@ export const HistoryContainer = styled.main`
     font-size: 1.5rem;
     line-height: 1.6;
   }
+  @media (max-width: 1024px) {
+    padding: 3.5rem 0;
+  }
+  @media (max-width: 425px) {
+    padding: 0;
+  }
 `
 
 export const TableContainer = styled.div`
@@ -51,6 +57,17 @@ export const TableContainer = styled.div`
       }
       &:last-child {
         padding-right: 1.5rem;
+      }
+
+      @media (max-width: 768px) {
+        &:first-child {
+          width: 40%;
+        }
+      }
+      @media (max-width: 425px) {
+        &:first-child {
+          width: 30%;
+        }
       }
     }
   }

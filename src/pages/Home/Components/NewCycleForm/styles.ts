@@ -18,6 +18,7 @@ const BaseInput = styled.input`
   font-weight: 700;
   height: 2.5rem;
   padding: 0 0.5rem;
+  text-align: center;
 
   border-bottom: 2px solid ${(props) => props.theme['gray-500']};
   color: ${(props) => props.theme['gray-100']};

@@ -8,6 +8,7 @@ export function Header() {
     <HeaderContainer>
       <span>
         <img width={60} src={logoTimer} alt="" />
+        <strong>pomodoro</strong>
       </span>
 
       <nav>

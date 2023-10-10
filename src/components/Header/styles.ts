@@ -4,8 +4,23 @@ export const HeaderContainer = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   span {
-    transform: rotateY(180deg);
+    display: flex;
+    align-items: center;
+    strong {
+      font-size: 2rem;
+      text-transform: capitalize;
+
+      color: ${(props) => props.theme['green-300']};
+
+      -webkit-text-stroke-width: 0.5px;
+      -webkit-text-stroke-color: ${(props) => props.theme['gray-300']};
+    }
+
+    img {
+      transform: rotateY(180deg);
+    }
   }
 
   nav {
